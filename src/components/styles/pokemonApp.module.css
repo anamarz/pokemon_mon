@@ -1,0 +1,17 @@
+.mainBlock {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

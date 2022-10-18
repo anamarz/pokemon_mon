@@ -1,0 +1,16 @@
+.pokemonDescription {
+    width: 40%;
+    height: 100%;
+}
+
+.container {
+    position: sticky;
+    top: 10px;
+}
+
+.headline{
+    font-size: 30px;
+    font-style: italic;
+}
+
+

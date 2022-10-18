@@ -1,0 +1,26 @@
+.pokemon {
+    width: 100%;
+    padding: 10px 5px;
+    margin: 10px 0;
+    background-color: rgb(255, 229, 163);
+    border: 3px solid rgb(212, 132, 39);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+h4 {
+    font-size: 20px;
+    color: rgb(13, 41, 116);
+}
+
+.button {
+    width: 33%;
+    height: 30px;
+    background-color: rgba(0, 45, 167, 0.523);
+    border-radius: 6px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    cursor: pointer;
+}
