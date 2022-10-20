@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-class PokemonApp extends React.Component{
+class PokemonApp extends React.Component {
   state = {
     pokemons: null,
     descriptionPokemon: null,
@@ -19,7 +19,7 @@ class PokemonApp extends React.Component{
     axios.get(`${this.state.nextUrl}`)
       .then((responce) => {
         const pokemons = responce.data.results;
-        const nextUrl =  responce.data.next;
+        const nextUrl = responce.data.next;
         console.log(pokemons);
         this.setState({ pokemons, nextUrl })
       });
@@ -32,12 +32,34 @@ class PokemonApp extends React.Component{
       }
       return null;
     });
-      this.setState({ pokemonId: pokemonId[0].url });
+    this.setState({ pokemonId: pokemonId[0].url });
   };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.pokemonId !== prevState.pokemonId) {
       this.fetchData(this.state.pokemonId)
+    }
+  }
+
+  nextPokemonPage = () => {
+    axios.get(`${this.state.nextUrl}`).then((responce) => {
+      const nextUrl = responce.data.next;
+      const previousUrl = responce.data.previous;
+      const pokemons = responce.data.results;
+      this.setState({ nextUrl, previousUrl, pokemons });
+    });
+
+    
+  };
+
+  previousPokemonPage = () => {
+    if(this.state.previousUrl !== null) {
+      axios.get(`${this.state.previousUrl}`).then((responce) => {
+        const nextUrl = responce.data.next;
+        const previousUrl = responce.data.previous;
+        const pokemons = responce.data.results;
+        this.setState({ nextUrl, previousUrl, pokemons });
+      });
     }
   }
 
@@ -51,27 +73,35 @@ class PokemonApp extends React.Component{
     })
   }
 
-  render() { 
-    const {pokemons, descriptionPokemon} = this.state;
+  render() {
+    const { pokemons, descriptionPokemon } = this.state;
 
-    if(!pokemons) {
+    if (!pokemons) {
       return <div>Loading...</div>
     }
 
-    return(
+    return (
       <div className={style.app}>
-        
-        <div className={style.mainBlock}> 
-         
+
+        <div className={style.mainBlock}>
+
           <PokemonList
-            pokemons = {pokemons}
-            pokemonDescription = {this.pokemonDescription}
+            pokemons={pokemons}
+            pokemonDescription={this.pokemonDescription}
           />
-          </div>
-          {descriptionPokemon && (
-            <PokemonDescription descriptionPokemon = {descriptionPokemon}/>
-          )}
-          </div>
+        
+        {descriptionPokemon && (
+          <PokemonDescription descriptionPokemon={descriptionPokemon} />
+        )}
+        </div>
+
+        <div className={style.buttons}>
+          <button onClick={() => this.previousPokemonPage()} >&laquo;</button>
+          <button onClick={() => this.nextPokemonPage()}>&raquo;</button>
+        </div>
+
+      </div>
+      
     )
   }
 

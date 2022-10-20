@@ -12,6 +12,24 @@
 
 .app {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+
+.buttons{
+    margin: 10px 0 20px;
+    
+}
+
+.buttons button {
+    background-color:rgba(0, 45, 167, 0.523);
+    border-radius: 7px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    margin: 0 5px;
+    height: 30px;
+    width: 100px;
 }
